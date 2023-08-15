@@ -332,7 +332,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "quoted_element"
+              "name": "_quoted_element"
             },
             {
               "type": "BLANK"
@@ -345,32 +345,8 @@
         }
       ]
     },
-    "quoted_element": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "variable_ref"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "gen_exp"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_quoted_text"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "escape_sequence"
-          }
-        ]
-      }
-    },
-    "_quoted_text": {
-      "type": "PREC_LEFT",
+    "_quoted_element": {
+      "type": "PREC_RIGHT",
       "value": 0,
       "content": {
         "type": "REPEAT1",
@@ -378,16 +354,33 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
-              "value": "$"
+              "type": "SYMBOL",
+              "name": "quoted_text"
             },
             {
-              "type": "PATTERN",
-              "value": "[^\\\\\"]"
+              "type": "SYMBOL",
+              "name": "variable_ref"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "gen_exp"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "escape_sequence"
             }
           ]
         }
       }
+    },
+    "quoted_text": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[^\\\\\"\\$]+"
+        }
+      ]
     },
     "unquoted_argument": {
       "type": "PREC_RIGHT",

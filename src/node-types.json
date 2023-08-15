@@ -591,21 +591,6 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "quoted_element",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "quoted_element",
-    "named": true,
-    "fields": {},
-    "children": {
       "multiple": true,
       "required": false,
       "types": [
@@ -618,11 +603,20 @@
           "named": true
         },
         {
+          "type": "quoted_text",
+          "named": true
+        },
+        {
           "type": "variable_ref",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "quoted_text",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "source_file",

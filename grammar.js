@@ -44,9 +44,9 @@ module.exports = grammar({
     _untrimmed_argument: ($) => choice(/\s/, $.bracket_comment, $.line_comment, $._argument, $._paren_argument),
     _paren_argument: ($) => seq("(", repeat($._untrimmed_argument), ")"),
 
-    quoted_argument: ($) => seq('"', optional($.quoted_element), '"'),
-    quoted_element: ($) => repeat1(choice($.variable_ref, $.gen_exp, $._quoted_text, $.escape_sequence)),
-    _quoted_text: (_) => prec.left(repeat1(choice("$", /[^\\"]/))),
+    quoted_argument: ($) => seq('"', optional($._quoted_element), '"'),
+    _quoted_element: ($) => prec.right(repeat1(choice($.quoted_text, $.variable_ref, $.gen_exp, $.escape_sequence))),
+    quoted_text: (_) => choice(/[^\\"\$]+/), // TODO (CAVEAT): There will be errors if the character $ is used in the text
 
     unquoted_argument: ($) =>
       prec.right(repeat1(choice($.variable_ref, $.gen_exp, $._unquoted_text, $.escape_sequence))),
