@@ -700,7 +700,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "escape_sequence",
@@ -708,6 +708,10 @@
         },
         {
           "type": "variable_ref",
+          "named": true
+        },
+        {
+          "type": "variable_text",
           "named": true
         }
       ]
@@ -900,6 +904,10 @@
   },
   {
     "type": "macro",
+    "named": true
+  },
+  {
+    "type": "variable_text",
     "named": true
   },
   {

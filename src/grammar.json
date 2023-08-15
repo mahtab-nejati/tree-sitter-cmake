@@ -68,8 +68,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "PATTERN",
-              "value": "[a-zA-Z0-9/_.+-]"
+              "type": "SYMBOL",
+              "name": "variable_text"
             },
             {
               "type": "SYMBOL",
@@ -82,6 +82,10 @@
           ]
         }
       }
+    },
+    "variable_text": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z0-9/_.+-]*"
     },
     "variable_ref": {
       "type": "CHOICE",
