@@ -6,7 +6,7 @@
   "author": "Uy Ha",
   "license": "MIT",
   "dependencies": {
-    "nan": "^2.16.0"
+    "nan": "^2.17.0"
   },
   "tree-sitter": [
     {
@@ -18,6 +18,18 @@
     }
   ],
   "devDependencies": {
-    "tree-sitter-cli": "^0.20.6"
-  }
+    "tree-sitter-cli": "^0.20.8"
+  },
+  "scripts": {
+    "install": "node-gyp rebuild"
+  },
+  "gypfile": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mahtab-nejati/tree-sitter-cmake.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mahtab-nejati/tree-sitter-cmake/issues"
+  },
+  "homepage": "https://github.com/mahtab-nejati/tree-sitter-cmake#readme"
 }

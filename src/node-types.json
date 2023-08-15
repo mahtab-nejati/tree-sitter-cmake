@@ -1,14 +1,22 @@
 [
   {
-    "type": "argument",
+    "type": "arguments",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
         {
           "type": "bracket_argument",
+          "named": true
+        },
+        {
+          "type": "bracket_comment",
+          "named": true
+        },
+        {
+          "type": "line_comment",
           "named": true
         },
         {
@@ -23,30 +31,7 @@
     }
   },
   {
-    "type": "argument_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "argument",
-          "named": true
-        },
-        {
-          "type": "bracket_comment",
-          "named": true
-        },
-        {
-          "type": "line_comment",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "block_command",
+    "type": "block_definition",
     "named": true,
     "fields": {},
     "children": {
@@ -54,26 +39,7 @@
       "required": true,
       "types": [
         {
-          "type": "argument_list",
-          "named": true
-        },
-        {
-          "type": "block",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "block_def",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "block_command",
+          "type": "block_header",
           "named": true
         },
         {
@@ -81,7 +47,26 @@
           "named": true
         },
         {
-          "type": "endblock_command",
+          "type": "endblock_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "block_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "arguments",
+          "named": true
+        },
+        {
+          "type": "block",
           "named": true
         }
       ]
@@ -93,10 +78,10 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "block_def",
+          "type": "block_definition",
           "named": true
         },
         {
@@ -104,15 +89,15 @@
           "named": true
         },
         {
-          "type": "foreach_loop",
+          "type": "foreach_statement",
           "named": true
         },
         {
-          "type": "function_def",
+          "type": "function_definition",
           "named": true
         },
         {
-          "type": "if_condition",
+          "type": "if_statement",
           "named": true
         },
         {
@@ -120,7 +105,7 @@
           "named": true
         },
         {
-          "type": "macro_def",
+          "type": "macro_definition",
           "named": true
         },
         {
@@ -128,7 +113,7 @@
           "named": true
         },
         {
-          "type": "while_loop",
+          "type": "while_statement",
           "named": true
         }
       ]
@@ -150,7 +135,38 @@
     }
   },
   {
-    "type": "else_command",
+    "type": "condition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "bracket_argument",
+          "named": true
+        },
+        {
+          "type": "bracket_comment",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "quoted_argument",
+          "named": true
+        },
+        {
+          "type": "unquoted_argument",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "else_clause",
     "named": true,
     "fields": {},
     "children": {
@@ -158,7 +174,11 @@
       "required": true,
       "types": [
         {
-          "type": "argument_list",
+          "type": "body",
+          "named": true
+        },
+        {
+          "type": "condition",
           "named": true
         },
         {
@@ -169,7 +189,7 @@
     }
   },
   {
-    "type": "elseif_command",
+    "type": "elseif_clause",
     "named": true,
     "fields": {},
     "children": {
@@ -177,7 +197,11 @@
       "required": true,
       "types": [
         {
-          "type": "argument_list",
+          "type": "body",
+          "named": true
+        },
+        {
+          "type": "condition",
           "named": true
         },
         {
@@ -188,7 +212,7 @@
     }
   },
   {
-    "type": "endblock_command",
+    "type": "endblock_clause",
     "named": true,
     "fields": {},
     "children": {
@@ -196,7 +220,7 @@
       "required": true,
       "types": [
         {
-          "type": "argument_list",
+          "type": "arguments",
           "named": true
         },
         {
@@ -207,7 +231,7 @@
     }
   },
   {
-    "type": "endforeach_command",
+    "type": "endforeach_clause",
     "named": true,
     "fields": {},
     "children": {
@@ -215,7 +239,7 @@
       "required": true,
       "types": [
         {
-          "type": "argument",
+          "type": "condition",
           "named": true
         },
         {
@@ -226,7 +250,7 @@
     }
   },
   {
-    "type": "endfunction_command",
+    "type": "endfunction_clause",
     "named": true,
     "fields": {},
     "children": {
@@ -234,18 +258,18 @@
       "required": true,
       "types": [
         {
-          "type": "argument_list",
+          "type": "endfunction",
           "named": true
         },
         {
-          "type": "endfunction",
+          "type": "identifier",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "endif_command",
+    "type": "endif_clause",
     "named": true,
     "fields": {},
     "children": {
@@ -253,7 +277,7 @@
       "required": true,
       "types": [
         {
-          "type": "argument_list",
+          "type": "condition",
           "named": true
         },
         {
@@ -264,7 +288,7 @@
     }
   },
   {
-    "type": "endmacro_command",
+    "type": "endmacro_clause",
     "named": true,
     "fields": {},
     "children": {
@@ -272,18 +296,18 @@
       "required": true,
       "types": [
         {
-          "type": "argument_list",
+          "type": "endmacro",
           "named": true
         },
         {
-          "type": "endmacro",
+          "type": "identifier",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "endwhile_command",
+    "type": "endwhile_clause",
     "named": true,
     "fields": {},
     "children": {
@@ -291,7 +315,7 @@
       "required": true,
       "types": [
         {
-          "type": "argument",
+          "type": "condition",
           "named": true
         },
         {
@@ -322,7 +346,7 @@
     "fields": {}
   },
   {
-    "type": "foreach_command",
+    "type": "foreach_clause",
     "named": true,
     "fields": {},
     "children": {
@@ -330,7 +354,11 @@
       "required": true,
       "types": [
         {
-          "type": "argument_list",
+          "type": "body",
+          "named": true
+        },
+        {
+          "type": "condition",
           "named": true
         },
         {
@@ -341,7 +369,26 @@
     }
   },
   {
-    "type": "foreach_loop",
+    "type": "foreach_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "endforeach_clause",
+          "named": true
+        },
+        {
+          "type": "foreach_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_definition",
     "named": true,
     "fields": {},
     "children": {
@@ -353,18 +400,18 @@
           "named": true
         },
         {
-          "type": "endforeach_command",
+          "type": "endfunction_clause",
           "named": true
         },
         {
-          "type": "foreach_command",
+          "type": "function_header",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "function_command",
+    "type": "function_header",
     "named": true,
     "fields": {},
     "children": {
@@ -372,34 +419,15 @@
       "required": true,
       "types": [
         {
-          "type": "argument_list",
+          "type": "arguments",
           "named": true
         },
         {
           "type": "function",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "function_def",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "body",
-          "named": true
         },
         {
-          "type": "endfunction_command",
-          "named": true
-        },
-        {
-          "type": "function_command",
+          "type": "identifier",
           "named": true
         }
       ]
@@ -414,14 +442,22 @@
       "required": false,
       "types": [
         {
-          "type": "argument",
+          "type": "bracket_argument",
+          "named": true
+        },
+        {
+          "type": "quoted_argument",
+          "named": true
+        },
+        {
+          "type": "unquoted_argument",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "if_command",
+    "type": "if_clause",
     "named": true,
     "fields": {},
     "children": {
@@ -429,7 +465,11 @@
       "required": true,
       "types": [
         {
-          "type": "argument_list",
+          "type": "body",
+          "named": true
+        },
+        {
+          "type": "condition",
           "named": true
         },
         {
@@ -440,7 +480,34 @@
     }
   },
   {
-    "type": "if_condition",
+    "type": "if_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "else_clause",
+          "named": true
+        },
+        {
+          "type": "elseif_clause",
+          "named": true
+        },
+        {
+          "type": "endif_clause",
+          "named": true
+        },
+        {
+          "type": "if_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "macro_definition",
     "named": true,
     "fields": {},
     "children": {
@@ -452,26 +519,18 @@
           "named": true
         },
         {
-          "type": "else_command",
+          "type": "endmacro_clause",
           "named": true
         },
         {
-          "type": "elseif_command",
-          "named": true
-        },
-        {
-          "type": "endif_command",
-          "named": true
-        },
-        {
-          "type": "if_command",
+          "type": "macro_header",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "macro_command",
+    "type": "macro_header",
     "named": true,
     "fields": {},
     "children": {
@@ -479,34 +538,15 @@
       "required": true,
       "types": [
         {
-          "type": "argument_list",
+          "type": "arguments",
+          "named": true
+        },
+        {
+          "type": "identifier",
           "named": true
         },
         {
           "type": "macro",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "macro_def",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "body",
-          "named": true
-        },
-        {
-          "type": "endmacro_command",
-          "named": true
-        },
-        {
-          "type": "macro_command",
           "named": true
         }
       ]
@@ -521,7 +561,7 @@
       "required": true,
       "types": [
         {
-          "type": "argument_list",
+          "type": "arguments",
           "named": true
         },
         {
@@ -593,7 +633,7 @@
       "required": false,
       "types": [
         {
-          "type": "block_def",
+          "type": "block_definition",
           "named": true
         },
         {
@@ -601,15 +641,15 @@
           "named": true
         },
         {
-          "type": "foreach_loop",
+          "type": "foreach_statement",
           "named": true
         },
         {
-          "type": "function_def",
+          "type": "function_definition",
           "named": true
         },
         {
-          "type": "if_condition",
+          "type": "if_statement",
           "named": true
         },
         {
@@ -617,7 +657,7 @@
           "named": true
         },
         {
-          "type": "macro_def",
+          "type": "macro_definition",
           "named": true
         },
         {
@@ -625,7 +665,7 @@
           "named": true
         },
         {
-          "type": "while_loop",
+          "type": "while_statement",
           "named": true
         }
       ]
@@ -697,26 +737,7 @@
     }
   },
   {
-    "type": "while_command",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "argument_list",
-          "named": true
-        },
-        {
-          "type": "while",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "while_loop",
+    "type": "while_clause",
     "named": true,
     "fields": {},
     "children": {
@@ -728,11 +749,30 @@
           "named": true
         },
         {
-          "type": "endwhile_command",
+          "type": "condition",
           "named": true
         },
         {
-          "type": "while_command",
+          "type": "while",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "while_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "endwhile_clause",
+          "named": true
+        },
+        {
+          "type": "while_clause",
           "named": true
         }
       ]
