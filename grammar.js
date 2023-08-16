@@ -38,9 +38,9 @@ module.exports = grammar({
 
     gen_exp: ($) => seq(alias(/\$\s*</, "gen_exp_s"), optional($._gen_exp_content), alias(/>/, "gen_exp_e")),
     _gen_exp_content: ($) =>
-      seq($._gen_exp_argument, optional(seq(":", repeat1(seq($._gen_exp_argument, optional(/[,;]/)))))),
+      seq($._gen_exp_argument, repeat(seq(/[:]+/, repeat1(seq($._gen_exp_argument, optional(/[,;]/)))))),
     _gen_exp_argument: ($) => prec.left(choice($.gen_exp, repeat1(choice($.variable_ref, $.gen_exp_text)))),
-    gen_exp_text: ($) => /[a-zA-Z0-9/_.=+-]+/, // TODO (CAVEAT): This might not be complete
+    gen_exp_text: ($) => /[a-zA-Z0-9/_.=+\^\\-]+/, // TODO (CAVEAT): This might not be complete
 
     _argument: ($) => choice($.bracket_argument, $.quoted_argument, $.unquoted_argument),
     _untrimmed_argument: ($) => choice(/\s/, $.bracket_comment, $.line_comment, $._argument, $._paren_argument),
@@ -74,11 +74,11 @@ module.exports = grammar({
     arguments: ($) => repeat1($._untrimmed_argument),
 
     function_header: ($) => seq($.function, "(", $.identifier, optional($.arguments), ")"),
-    endfunction_clause: ($) => seq($.endfunction, "(", optional($.identifier), ")"),
+    endfunction_clause: ($) => seq($.endfunction, "(", optional($.identifier), optional($.arguments), ")"),
     function_definition: ($) => seq($.function_header, optional($.body), $.endfunction_clause),
 
     macro_header: ($) => seq($.macro, "(", $.identifier, optional($.arguments), ")"),
-    endmacro_clause: ($) => seq($.endmacro, "(", optional($.identifier), ")"),
+    endmacro_clause: ($) => seq($.endmacro, "(", optional($.identifier), optional($.arguments), ")"),
     macro_definition: ($) => seq($.macro_header, optional($.body), $.endmacro_clause),
 
     block_header: ($) => seq($.block, "(", optional($.arguments), ")"),

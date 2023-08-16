@@ -258,6 +258,10 @@
       "required": true,
       "types": [
         {
+          "type": "arguments",
+          "named": true
+        },
+        {
           "type": "endfunction",
           "named": true
         },
@@ -295,6 +299,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "arguments",
+          "named": true
+        },
         {
           "type": "endmacro",
           "named": true
@@ -795,10 +803,6 @@
   },
   {
     "type": ")",
-    "named": false
-  },
-  {
-    "type": ":",
     "named": false
   },
   {
