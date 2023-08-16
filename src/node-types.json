@@ -442,15 +442,15 @@
       "required": false,
       "types": [
         {
-          "type": "bracket_argument",
+          "type": "gen_exp",
           "named": true
         },
         {
-          "type": "quoted_argument",
+          "type": "gen_exp_text",
           "named": true
         },
         {
-          "type": "unquoted_argument",
+          "type": "variable_ref",
           "named": true
         }
       ]
@@ -671,7 +671,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "escape_sequence",
@@ -682,11 +682,20 @@
           "named": true
         },
         {
+          "type": "unquoted_text",
+          "named": true
+        },
+        {
           "type": "variable_ref",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "unquoted_text",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "variable",
@@ -781,10 +790,6 @@
     "named": false
   },
   {
-    "type": "$",
-    "named": false
-  },
-  {
     "type": "(",
     "named": false
   },
@@ -798,22 +803,6 @@
   },
   {
     "type": ";",
-    "named": false
-  },
-  {
-    "type": "<",
-    "named": false
-  },
-  {
-    "type": ">",
-    "named": false
-  },
-  {
-    "type": "CACHE",
-    "named": false
-  },
-  {
-    "type": "ENV",
     "named": false
   },
   {
@@ -885,6 +874,18 @@
     "named": true
   },
   {
+    "type": "gen_exp_e",
+    "named": false
+  },
+  {
+    "type": "gen_exp_s",
+    "named": false
+  },
+  {
+    "type": "gen_exp_text",
+    "named": true
+  },
+  {
     "type": "identifier",
     "named": true
   },
@@ -901,19 +902,19 @@
     "named": true
   },
   {
+    "type": "var_e",
+    "named": false
+  },
+  {
+    "type": "var_s",
+    "named": false
+  },
+  {
     "type": "variable_text",
     "named": true
   },
   {
     "type": "while",
     "named": true
-  },
-  {
-    "type": "{",
-    "named": false
-  },
-  {
-    "type": "}",
-    "named": false
   }
 ]

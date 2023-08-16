@@ -30,15 +30,17 @@ module.exports = grammar({
     _escape_semicolon: (_) => choice(";", "\\;"),
 
     variable: ($) => prec.left(repeat1(choice($.variable_text, $.escape_sequence, $.variable_ref))),
-    variable_text: (_) => /[a-zA-Z0-9/_.+-]*/,
+    variable_text: (_) => /[a-zA-Z0-9/_.+-]+/,
     variable_ref: ($) => choice($.normal_var, $.env_var, $.cache_var),
-    normal_var: ($) => seq("$", "{", $.variable, "}"),
-    env_var: ($) => seq("$", "ENV", "{", $.variable, "}"),
-    cache_var: ($) => seq("$", "CACHE", "{", $.variable, "}"),
+    normal_var: ($) => seq(alias(/\$\s*\{/, "var_s"), $.variable, alias(/\}/, "var_e")),
+    env_var: ($) => seq(alias(/\$\s*[E|e][N|n][V|v]\s*\{/, "var_s"), $.variable, alias(/\}/, "var_e")),
+    cache_var: ($) => seq(alias(/\$\s*[C|c][A|a][C|c][H|h][E|e]\s*\{/, "var_s"), $.variable, alias(/\}/, "var_e")),
 
-    gen_exp: ($) => seq("$", "<", optional($._gen_exp_content), ">"),
-    _gen_exp_content: ($) => seq($._argument, optional($._gen_exp_arguments)),
-    _gen_exp_arguments: ($) => seq(":", repeat(seq($._argument, optional(/[,;]/)))),
+    gen_exp: ($) => seq(alias(/\$\s*</, "gen_exp_s"), optional($._gen_exp_content), alias(/>/, "gen_exp_e")),
+    _gen_exp_content: ($) =>
+      seq($._gen_exp_argument, optional(seq(":", repeat1(seq($._gen_exp_argument, optional(/[,;]/)))))),
+    _gen_exp_argument: ($) => prec.left(choice($.gen_exp, repeat1(choice($.variable_ref, $.gen_exp_text)))),
+    gen_exp_text: ($) => /[a-zA-Z0-9/_.=+-]+/, // TODO (CAVEAT): This might not be complete
 
     _argument: ($) => choice($.bracket_argument, $.quoted_argument, $.unquoted_argument),
     _untrimmed_argument: ($) => choice(/\s/, $.bracket_comment, $.line_comment, $._argument, $._paren_argument),
@@ -46,11 +48,11 @@ module.exports = grammar({
 
     quoted_argument: ($) => seq('"', optional($._quoted_element), '"'),
     _quoted_element: ($) => prec.right(repeat1(choice($.quoted_text, $.variable_ref, $.gen_exp, $.escape_sequence))),
-    quoted_text: (_) => choice(/[^\\"\$]+/), // TODO (CAVEAT): There will be errors if the character $ is used in the text
+    quoted_text: (_) => choice(/\$/, /[^\\"\$]+/), // NOTE: The $ char is stored in a separate node
 
     unquoted_argument: ($) =>
-      prec.right(repeat1(choice($.variable_ref, $.gen_exp, $._unquoted_text, $.escape_sequence))),
-    _unquoted_text: (_) => prec.left(repeat1(choice("$", /[^()#"\\]/))),
+      prec.right(repeat1(choice($.unquoted_text, $.variable_ref, $.gen_exp, $.escape_sequence))),
+    unquoted_text: (_) => choice(/\$/, /[^\s()#"\\\$]+/), // NOTE: The $ char is stored in a separate node
 
     condition: ($) => seq("(", repeat($._untrimmed_argument), ")"), /// TODO: Improve to take operators
     body: ($) => repeat1($._statement), /// NOTE: To allow for empty body, use optional($.body)

@@ -5,7 +5,7 @@ enum TokenType
 {
   BRACKET_ARGUMENT,
   BRACKET_COMMENT,
-  LINE_COMMENT
+  LINE_COMMENT,
 };
 
 static void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
