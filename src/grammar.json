@@ -251,7 +251,7 @@
     },
     "gen_exp_text": {
       "type": "PATTERN",
-      "value": "[^:,;>]+"
+      "value": "[^:,;\">]+"
     },
     "_argument": {
       "type": "CHOICE",
@@ -997,6 +997,28 @@
         }
       ]
     },
+    "skip_evaluation": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "@"
+          },
+          "named": false,
+          "value": "skip_symb"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "skip_content"
+        }
+      ]
+    },
+    "skip_content": {
+      "type": "PATTERN",
+      "value": "[^\\n\\r]*"
+    },
     "_statement": {
       "type": "CHOICE",
       "members": [
@@ -1011,6 +1033,10 @@
         {
           "type": "SYMBOL",
           "name": "_command_invocation"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "skip_evaluation"
         }
       ]
     },

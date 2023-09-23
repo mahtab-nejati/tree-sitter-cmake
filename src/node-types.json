@@ -113,6 +113,10 @@
           "named": true
         },
         {
+          "type": "skip_evaluation",
+          "named": true
+        },
+        {
           "type": "while_statement",
           "named": true
         }
@@ -634,6 +638,21 @@
     "fields": {}
   },
   {
+    "type": "skip_evaluation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "skip_content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -671,6 +690,10 @@
         },
         {
           "type": "normal_command",
+          "named": true
+        },
+        {
+          "type": "skip_evaluation",
           "named": true
         },
         {
@@ -910,6 +933,14 @@
   },
   {
     "type": "sep",
+    "named": false
+  },
+  {
+    "type": "skip_content",
+    "named": true
+  },
+  {
+    "type": "skip_symb",
     "named": false
   },
   {

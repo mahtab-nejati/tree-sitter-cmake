@@ -39,7 +39,7 @@ module.exports = grammar({
     gen_exp: ($) => seq(alias(/\$\s*</, "gen_exp_s"), optional($._gen_exp_content), alias(/>/, "gen_exp_e")),
     _gen_exp_content: ($) => repeat1(choice($.gen_exp, $.variable_ref, $.gen_exp_text, alias(/[:,;]/, "sep"))),
     // gen_exp_text: ($) => /[a-zA-Z0-9/_.=+\^\\\(\)"\[\]-]+/, // TODO (CAVEAT): This might not be complete
-    gen_exp_text: (_) => /[^:,;>]+/, // TODO (CAVEAT): Fails if someone uses > inside the text.
+    gen_exp_text: (_) => /[^:,;">]+/, // TODO (CAVEAT): Fails if someone uses > inside the text.
 
     _argument: ($) => choice($.bracket_argument, $.quoted_argument, $.unquoted_argument),
     _untrimmed_argument: ($) => choice(/\s/, $.bracket_comment, $.line_comment, $._argument, $._paren_argument),
@@ -96,7 +96,10 @@ module.exports = grammar({
         $.macro_definition,
         $.block_definition
       ),
-    _statement: ($) => choice($.bracket_comment, $.line_comment, $._command_invocation),
+
+    skip_evaluation: ($) => seq(alias(/@/, "skip_symb"), $.skip_content),
+    skip_content: ($) => /[^\n\r]*/,
+    _statement: ($) => choice($.bracket_comment, $.line_comment, $._command_invocation, $.skip_evaluation),
 
     ...ruleNames(...keywords),
     identifier: ($) => choice($.variable_ref, /[A-Za-z_][A-Za-z0-9_]*/),
