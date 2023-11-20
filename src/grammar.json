@@ -341,32 +341,46 @@
       ]
     },
     "_quoted_element": {
-      "type": "PREC_RIGHT",
-      "value": 0,
-      "content": {
-        "type": "REPEAT1",
-        "content": {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "quoted_text"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "variable_ref"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "gen_exp"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "escape_sequence"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PREC_RIGHT",
+          "value": 0,
+          "content": {
+            "type": "REPEAT1",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "quoted_text"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "variable_ref"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "gen_exp"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "escape_sequence"
+                }
+              ]
             }
-          ]
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\$\\s*<"
+          },
+          "named": false,
+          "value": "quoted_text"
         }
-      }
+      ]
     },
     "quoted_text": {
       "type": "CHOICE",

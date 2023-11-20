@@ -932,6 +932,10 @@
     "named": true
   },
   {
+    "type": "quoted_text",
+    "named": false
+  },
+  {
     "type": "sep",
     "named": false
   },

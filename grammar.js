@@ -46,7 +46,11 @@ module.exports = grammar({
     _paren_argument: ($) => seq("(", repeat($._untrimmed_argument), ")"),
 
     quoted_argument: ($) => seq('"', optional($._quoted_element), '"'),
-    _quoted_element: ($) => prec.right(repeat1(choice($.quoted_text, $.variable_ref, $.gen_exp, $.escape_sequence))),
+    _quoted_element: ($) =>
+      choice(
+        prec.right(repeat1(choice($.quoted_text, $.variable_ref, $.gen_exp, $.escape_sequence))),
+        alias(/\$\s*</, "quoted_text")
+      ),
     quoted_text: (_) => choice(/\$/, /[^\\"\$]+/), // NOTE: The $ char is stored in a separate node
 
     unquoted_argument: ($) =>
