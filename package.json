@@ -1,12 +1,12 @@
 {
   "name": "tree-sitter-cmake",
-  "version": "0.4.1",
+  "version": "1.0.0",
   "description": "CMake grammar for tree-sitter",
   "main": "bindings/node",
   "author": "Uy Ha",
   "license": "MIT",
   "dependencies": {
-    "nan": "^2.17.0"
+    "nan": "^2.20.0"
   },
   "tree-sitter": [
     {
@@ -31,5 +31,8 @@
   "bugs": {
     "url": "https://github.com/mahtab-nejati/tree-sitter-cmake/issues"
   },
-  "homepage": "https://github.com/mahtab-nejati/tree-sitter-cmake#readme"
+  "homepage": "https://github.com/mahtab-nejati/tree-sitter-cmake#readme",
+  "keywords": [
+    "parser"
+  ]
 }
